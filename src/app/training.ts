@@ -75,6 +75,13 @@ const usersArray: IUser[] = [
     isAdmin: false,
     password: 'zxvzxvcsde',
   },
+  {
+    id: 5,
+    name: 'Husan',
+    age: 14,
+    isAdmin: false,
+    password: 'zxvzxvcsde',
+  },
 ];
 console.log(usersArray);
 
