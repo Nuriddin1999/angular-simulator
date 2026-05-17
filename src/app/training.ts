@@ -15,10 +15,6 @@ interface IMan extends IUser {
 
 // Создать переменную status, которая может быть только: "loading", "success", "error".
 let someStatus: 'loading' | 'success' | 'error' = 'loading';
-// Или
-{
-  let status: 'loading' | 'success' | 'error' = 'success';
-}
 
 // Создать переменную textFormat, которая может быть только: 'uppercase', 'lowercase', 'capitalize'".
 let textFormat: 'uppercase' | 'lowercase' | 'capitalize' = 'uppercase';
