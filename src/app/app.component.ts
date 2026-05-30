@@ -24,7 +24,7 @@ export class AppComponent {
   }
 
   saveLastVisit(): void {
-    const time = Date.now().toString();
+    const time = new Date().toLocaleString();
     localStorage.setItem('lastVisitTime', time);
   }
 
