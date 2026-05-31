@@ -1,0 +1,49 @@
+@use './_fonts';
+@use './_normalize';
+
+* {
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
+:root {
+  --white-color: #fdfdfd;
+  --black-color: #18121e;
+  --yellow-color: #f2be22;
+  --font-bold: 700;
+  --font-normal: 600;
+  --font-min: 400;
+}
+
+.fs-16 {
+  font-size: 16px;
+}
+
+.fs-18 {
+  font-size: 18px;
+}
+
+.fs-20 {
+  font-size: 20px;
+}
+
+.fs-50 {
+  font-size: 50px;
+}
+
+.container {
+  width: 1180px;
+  margin: 0 auto;
+}
