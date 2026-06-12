@@ -3,7 +3,8 @@ import { FormsModule } from '@angular/forms';
 import './training';
 import { Color } from '../enums/color';
 import './collection';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { IAboutBlockImage, IBestProgramsImage, IBestProgramsItem } from './interfaces';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +29,7 @@ export class AppComponent {
 
   activeImageIndex: number = 1;
 
-  aboutBlockImages: any = [
+  aboutBlockImages: IAboutBlockImage[] = [
     {
       src: '/pictures/about-mountain.jpg',
       alt: 'mountain',
@@ -39,7 +40,7 @@ export class AppComponent {
     },
   ];
 
-  bestProgramsList: any = [
+  bestProgramsList: IBestProgramsItem[] = [
     {
       id: 1,
       src: '/pictures/guide-icon.svg',
@@ -69,7 +70,7 @@ export class AppComponent {
     },
   ];
 
-  bestProgramsImages: any = [
+  bestProgramsImages: IBestProgramsImage[] = [
     {
       id: 1,
       src: '/pictures/waterAndGrass.jpg',
@@ -117,22 +118,22 @@ export class AppComponent {
     return !this.tour.date || !this.tour.location || !this.tour.participants;
   }
 
-    public showDate(): void {
+  showDate(): void {
     this.currentDate = new Date();
     this.interactive = 'date';
     clearInterval(this.dateTimerId);
 
     this.dateTimerId = setInterval(() => {
       this.currentDate = new Date();
-    }, 1000)
+    }, 1000);
   }
 
-  public showCounter(): void {
+  showCounter(): void {
     clearInterval(this.dateTimerId);
     this.interactive = 'counter';
   }
 
-  public openDatePicker(input: HTMLInputElement): void {
+  openDatePicker(input: HTMLInputElement): void {
     input.focus();
     input.showPicker();
   }
