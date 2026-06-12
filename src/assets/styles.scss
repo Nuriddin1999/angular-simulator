@@ -1,5 +1,6 @@
 @use './_fonts';
 @use './_normalize';
+@use './btn';
 
 * {
   font-family: 'Nunito Sans';
@@ -9,13 +10,14 @@
   box-sizing: border-box;
 }
 
+ul {
+  list-style: none;
+}
+
 body {
   margin: 0;
-  min-width: 100vw;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: end;
+  overflow-x: auto;
+  width: 100%;
 }
 
 :root {
