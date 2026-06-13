@@ -20,33 +20,39 @@
           <li class="nav-item"><a class="nav-item-link" href="#">Контакты</a></li>
         </ul>
       </nav>
-      
+
       <div class="interactive-wrapper">
         <button class="btn btn--secondary">Консультация</button>
-        @if(interactive === 'counter') {
-        <div class="interactive">
-          <div>
-            <button class="interactive-btn" (click)="count = count + 1">+</button>
-            <div>{{count}}</div>
-            <button class="interactive-btn" (click)="count = count - 1" [disabled]="count === 0">-</button>
+        @if (interactive === 'counter') {
+          <div class="interactive">
+            <div>
+              <button class="interactive-btn" (click)="count = count + 1">+</button>
+              <div>{{ count }}</div>
+              <button class="interactive-btn" (click)="count = count - 1" [disabled]="count === 0">
+                -
+              </button>
+            </div>
+            <button class="interactive-toggle-btn" (click)="showDate()">Показать дату</button>
           </div>
-          <button class="interactive-toggle-btn" (click)="showDate()">Показать дату</button>
-        </div>
         }
-        @if(interactive === 'date') {
-        <div class="interactive">
-          <div class="interactive-date">{{ currentDate | date:'dd.MM.yyyy H:mm:ss' }}</div>
-          <button class="interactive-toggle-btn" (click)="showCounter()">Показать кликер</button>
-        </div>
+        @if (interactive === 'date') {
+          <div class="interactive">
+            <div class="interactive-date">{{ currentDate | date: 'dd.MM.yyyy H:mm:ss' }}</div>
+            <button class="interactive-toggle-btn" (click)="showCounter()">Показать кликер</button>
+          </div>
         }
       </div>
     </div>
-    
   </div>
 </header>
 <main class="main">
+    @if (isLoading) {
+    <div class="loading">
+      <img src="/pictures/loading-icon.svg" alt="loading..." width="51" height="51" />
+    </div>
+  }
   <section class="hero">
-    <img class="background-nature" src="/pictures/background-nature.png" alt="background-nature" />
+    <img class="background-nature" src="/pictures/background-nature.png" alt="background-nature" width="1920" height="985"/>
     <div class="container hero-container">
       <h1 class="search-title fs-50">
         Насладись прогулкой в&nbsp;горах с&nbsp;командой единомышленников
@@ -93,7 +99,7 @@
       </div>
 
       <div class="live-text">
-        <input type="text" [(ngModel)]="liveInput" /> {{ '' }}
+        <input placeholder="live input" type="text" [(ngModel)]="liveInput" />
 
         @if (liveInput) {
           <span>{{ liveInput }}</span>

@@ -13,6 +13,8 @@ import { IAboutBlockImage, IBestProgramsImage, IBestProgramsItem } from './inter
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  isLoading: boolean = true;
+
   companyName: string = 'румтибет';
   tour = {
     location: '',
@@ -100,16 +102,22 @@ export class AppComponent {
     console.log(localStorage.getItem('NumberOfVisits'));
   }
 
-  isPrimaryColor(color: string): boolean {
+  private ngOnInit(): void {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 2000);
+  }
+
+  private isPrimaryColor(color: string): boolean {
     return color === Color.RED || color === Color.GREEN || color === Color.BLUE;
   }
 
-  saveLastVisit(): void {
+  private saveLastVisit(): void {
     const time = new Date().toLocaleString();
     localStorage.setItem('lastVisitTime', time);
   }
 
-  saveNumberOfVisits(): void {
+  private saveNumberOfVisits(): void {
     const numberOfVisitsBefore = Number(localStorage.getItem('NumberOfVisits')) || 0;
     localStorage.setItem('NumberOfVisits', String(numberOfVisitsBefore + 1));
   }
