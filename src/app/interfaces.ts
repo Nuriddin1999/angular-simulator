@@ -17,3 +17,29 @@ export interface IBestProgramsImage {
   src: string;
   alt: string;
 }
+
+export interface IPopularTourisms {
+  id: number;
+  title: string;
+  text: string;
+  price: number;
+  rating: number;
+  image: string;
+  alt: string;
+}
+
+export interface IBlog {
+  id: number;
+  title: string;
+  text: string;
+  date: string;
+  image: string;
+  alt: string;
+}
+
+export interface IMessage {
+  id: number;
+  status: string;
+  text: string;
+  isClosing?: boolean;
+}

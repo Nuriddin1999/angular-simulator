@@ -46,13 +46,19 @@
   </div>
 </header>
 <main class="main">
-    @if (isLoading) {
+  @if (isLoading) {
     <div class="loading">
       <img src="/pictures/loading-icon.svg" alt="loading..." width="51" height="51" />
     </div>
   }
   <section class="hero">
-    <img class="background-nature" src="/pictures/background-nature.png" alt="background-nature" width="1920" height="985"/>
+    <img
+      class="background-nature"
+      src="/pictures/background-nature.png"
+      alt="background-nature"
+      width="1920"
+      height="985"
+    />
     <div class="container hero-container">
       <h1 class="search-title fs-50">
         Насладись прогулкой в&nbsp;горах с&nbsp;командой единомышленников
@@ -147,7 +153,7 @@
           Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его
           поисками в классической латинской литературе.
         </p>
-        <button class="btn btn--primary">Программа тура</button>
+        <button class="btn btn--primary" (click)="addMessageFromTemplate(2)">Программа тура</button>
       </div>
     </div>
   </section>
@@ -173,7 +179,7 @@
             </li>
           }
         </ul>
-        <button class="btn btn--primary">Стоимость программ</button>
+        <button class="btn btn--primary" (click)="addMessageFromTemplate(1)">Стоимость программ</button>
       </div>
       <ul class="best-programs__images-list">
         @for (item of bestProgramsImages; track item.id) {
@@ -184,4 +190,99 @@
       </ul>
     </div>
   </section>
+  <section class="popular-tourisms">
+    <div class="container popular-tourisms__container">
+      <span class="popular-tourisms__span">по версии отдыхающих</span>
+      <h2 class="popular-tourisms__title">Популярные направления</h2>
+      <ul class="popular-tourisms__list">
+        @for (item of popularTourisms; track item.id) {
+          <li class="popular-tourisms__item">
+            <img
+              class="popular-tourisms__item-image"
+              [src]="item.image"
+              [alt]="item.alt"
+              width="380"
+              height="500"
+            />
+            <div class="popular-tourisms__item-wrap">
+              <div class="popular-tourisms__item-left">
+                <h3 class="popular-tourisms__item-title">{{ item.title }}</h3>
+                <span class="popular-tourisms__item-text">{{ item.text }}</span>
+              </div>
+              <span class="popular-tourisms__item-price fs-20">{{ item.price }} $</span>
+            </div>
+            <div class="popular-tourisms__item-rating">
+              <img src="/pictures/rating-icon.svg" alt="rating-icon" width="17" height="16" />
+              <span class="popular-tourisms__item-rating-value">{{ item.rating.toFixed(1) }}</span>
+            </div>
+          </li>
+        }
+      </ul>
+      <button class="btn btn--primary popular-tourisms__btn" (click)="addMessageFromTemplate(0)">
+        Рейтинг направлений
+      </button>
+    </div>
+  </section>
+  <section class="blog">
+    <div class="container">
+      <span class="blog__span">делимся впечатлениями</span>
+      <h2 class="blog__title">Блог о путешествиях</h2>
+      <ul class="blog__list">
+        @for (item of blog; track item.id) {
+          <li
+            class="blog__item"
+          >
+            <img
+              class="blog__item-image"
+              [src]="item.image"
+              [alt]="item.alt"
+              width="230"
+              height="280"
+            />
+            <div class="blog__item-right">
+              <h3
+                class="blog__item-title"
+              >
+                {{ item.title }}
+              </h3>
+              <p class="blog__item-text">{{ item.text }}</p>
+              <div class="blog__item-bottom">
+                <span class="blog__item-date">{{ item.date }}</span>
+                <a class="blog__item-detail-link" href="#">читать статью</a>
+              </div>
+            </div>
+          </li>
+        }
+      </ul>
+      <button class="btn btn--primary blog__btn" (click)="addMessageFromTemplate(3)">
+        Другие материалы
+      </button>
+    </div>
+  </section>
 </main>
+
+@if (activeMessages.length !== 0) {
+  <ul class="toasts-list">
+    @for (message of activeMessages; track message.id) {
+      <li class="toasts-list__item">
+        <ng-container
+          [ngTemplateOutlet]="messageTemplate"
+          [ngTemplateOutletContext]="{ $implicit: message }"
+        ></ng-container>
+      </li>
+    }
+  </ul>
+}
+
+<ng-template #messageTemplate let-message>
+  <div class="toast" [class.toast--closing]="message.isClosing">
+    <img src="pictures/sms-icon.svg" alt="sms-icon" width="40" height="40" />
+    <div class="toast__wrap">
+      <span class="toast__status fs-16">{{ message.status }}</span>
+      <span class="toast__message">{{ message.text }}</span>
+    </div>
+    <button class="toast__close-btn" (click)="closeMessage(message.id)">
+      <img src="pictures/close-icon.svg" alt="close-icon" width="20" height="20" />
+    </button>
+  </div>
+</ng-template>
