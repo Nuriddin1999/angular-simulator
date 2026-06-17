@@ -1,19 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import './training';
 import { Color } from '../enums/color';
 import './collection';
-import { CommonModule } from '@angular/common';
-import { IAboutBlockImage, IBestProgramsImage, IBestProgramsItem } from './interfaces';
+import { CommonModule, NgTemplateOutlet } from '@angular/common';
+import {
+  IAboutBlockImage,
+  IBestProgramsImage,
+  IBestProgramsItem,
+  IBlog,
+  IMessage,
+  IPopularTourisms,
+} from './interfaces';
+import { LocalStorageService } from './services/local-storage/local-storage.service';
+import { MessagesService } from './services/messages/messages.service';
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, NgTemplateOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
   isLoading: boolean = true;
+
+  LocalStorageService: LocalStorageService = inject(LocalStorageService);
+  MessagesService: MessagesService = inject(MessagesService);
 
   companyName: string = 'румтибет';
   tour = {
@@ -95,14 +107,79 @@ export class AppComponent {
     },
   ];
 
+  popularTourisms: IPopularTourisms[] = [
+    {
+      id: 1,
+      title: 'Озеро возле гор',
+      text: 'романтическое приключение',
+      price: 480,
+      rating: 4.9,
+      image: '/pictures/lakeAroundMountains.jpg',
+      alt: 'Lake around mountains',
+    },
+    {
+      id: 2,
+      title: 'Ночь в горах',
+      text: 'в компании друзей',
+      price: 500,
+      rating: 4.5,
+      image: '/pictures/nightOnMountains.jpg',
+      alt: 'Night on mountains',
+    },
+    {
+      id: 3,
+      title: 'Растяжка в горах',
+      text: 'для тех, кто забоится о себе',
+      price: 230,
+      rating: 5.0,
+      image: '/pictures/stretchingOnMountains.jpg',
+      alt: 'Stretching on mountains',
+    },
+  ];
+
+  blog: IBlog[] = [
+    {
+      id: 1,
+      title: 'Красивая Италия, какая она в реальности?',
+      text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      date: '01/04/2023',
+      image: '/pictures/beautiful_Italy.jpg',
+      alt: 'Beautiful Italy',
+    },
+    {
+      id: 2,
+      title: 'Долой сомнения! Весь мир открыт для вас!',
+      text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации ... независимые способы реализации соответствующих...',
+      date: '01/04/2023',
+      image: '/pictures/airplane.jpg',
+      alt: 'Airplane',
+    },
+    {
+      id: 3,
+      title: 'Как подготовиться к путешествию в одиночку? ',
+      text: 'Для современного мира базовый вектор развития предполагает.',
+      date: '01/04/2023',
+      image: '/pictures/aloneTravel.jpg',
+      alt: 'Travel alone',
+    },
+    {
+      id: 4,
+      title: 'Индия ... летим?',
+      text: 'Для современного мира базовый.',
+      date: '01/04/2023',
+      image: '/pictures/Taj_Mahal.jpg',
+      alt: 'Taj Mahal',
+    },
+  ];
+
   constructor() {
     this.saveLastVisit();
     this.saveNumberOfVisits();
-    console.log(localStorage.getItem('lastVisitTime'));
-    console.log(localStorage.getItem('NumberOfVisits'));
+    console.log(this.LocalStorageService.getItem('lastVisitTime'));
+    console.log(this.LocalStorageService.getItem('NumberOfVisits'));
   }
 
-  private ngOnInit(): void {
+    private ngOnInit(): void {
     setTimeout(() => {
       this.isLoading = false;
     }, 2000);
@@ -114,12 +191,12 @@ export class AppComponent {
 
   private saveLastVisit(): void {
     const time = new Date().toLocaleString();
-    localStorage.setItem('lastVisitTime', time);
+    this.LocalStorageService.setItem('lastVisitTime', time);
   }
 
   private saveNumberOfVisits(): void {
-    const numberOfVisitsBefore = Number(localStorage.getItem('NumberOfVisits')) || 0;
-    localStorage.setItem('NumberOfVisits', String(numberOfVisitsBefore + 1));
+    const numberOfVisitsBefore = Number(this.LocalStorageService.getItem('NumberOfVisits')) || 0;
+    this.LocalStorageService.setItem('NumberOfVisits', String(numberOfVisitsBefore + 1));
   }
 
   get isSearchDisabled(): boolean {
@@ -144,5 +221,24 @@ export class AppComponent {
   openDatePicker(input: HTMLInputElement): void {
     input.focus();
     input.showPicker();
+  }
+
+  get activeMessages(): IMessage[] {
+    return this.MessagesService.activeMessages;
+  }
+
+  addMessage(messageObj: Omit<IMessage, 'id'>) {
+    this.MessagesService.addMessage(messageObj);
+  }
+
+  closeMessage(id: number): void {
+    this.MessagesService.closeMessage(id);
+  }
+
+  addMessageFromTemplate(index: number): void {
+    const message = this.MessagesService.messagesTemplate[index];
+    if (message) {
+      this.MessagesService.addMessage(message);
+    }
   }
 }
