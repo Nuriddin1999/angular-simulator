@@ -13,7 +13,7 @@ export class MessagesService {
     { id: 4, status: messageStatus.ERROR, text: 'Материалы недоступны' },
   ];
 
-  activeMessages: IMessage[] = [];
+  private activeMessages: IMessage[] = [];
 
   getActiveMessages(): IMessage[] {
     return this.activeMessages;
