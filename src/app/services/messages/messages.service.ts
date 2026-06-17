@@ -13,15 +13,15 @@ export class MessagesService {
     { id: 4, status: messageStatus.ERROR, text: 'Материалы недоступны' },
   ];
 
-  private activeMessages: IMessage[] = [];
+  private _activeMessages: IMessage[] = [];
 
-  getActiveMessages(): IMessage[] {
-    return this.activeMessages;
+  get activeMessages(): IMessage[] {
+    return this._activeMessages;
   }
 
   addMessage(messageObj: Omit<IMessage, 'id'>): void {
     const generatedId = Date.now();
-    this.activeMessages.unshift({
+    this._activeMessages.unshift({
       id: generatedId,
       status: messageObj.status,
       text: messageObj.text,
@@ -31,14 +31,14 @@ export class MessagesService {
   }
 
   closeMessage(id: number): void {
-    const message = this.activeMessages.find((m) => m.id === id);
+    const message = this._activeMessages.find((m) => m.id === id);
 
     if (!message) return;
 
     message.isClosing = true;
     
     setTimeout(() => {
-      this.activeMessages = this.activeMessages.filter((message) => message.id !== id);
+      this._activeMessages = this.activeMessages.filter((message) => message.id !== id);
     }, 500);
   }
 }
