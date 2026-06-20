@@ -26,7 +26,6 @@ import { LoaderComponent } from '../layout/loader/loader.component';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  isLoading: boolean = true;
 
   LocalStorageService: LocalStorageService = inject(LocalStorageService);
 
@@ -35,12 +34,6 @@ export class AppComponent {
     this.saveNumberOfVisits();
     console.log(this.LocalStorageService.getItem('lastVisitTime'));
     console.log(this.LocalStorageService.getItem('NumberOfVisits'));
-  }
-
-  private ngOnInit(): void {
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 2000);
   }
 
   private isPrimaryColor(color: string): boolean {
