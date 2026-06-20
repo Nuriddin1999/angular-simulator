@@ -43,3 +43,13 @@ export interface IMessage {
   text: string;
   isClosing?: boolean;
 }
+
+export interface IShareImpressions extends IBestProgramsImage {}
+
+export interface ISocialMedias extends IBestProgramsImage {}
+
+export interface IHeaderLinks {
+  id: number;
+  linkName: string;
+  href: string;
+}
