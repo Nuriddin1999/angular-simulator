@@ -6,20 +6,13 @@ import { IMessage } from '../../interfaces';
   providedIn: 'root',
 })
 export class MessagesService {
-  readonly messagesTemplate: IMessage[] = [
-    { id: 1, status: messageStatus.SUCCESS, text: 'Направления получены' },
-    { id: 2, status: messageStatus.INFO, text: 'Стоимость отправлена на почту' },
-    { id: 3, status: messageStatus.WARN, text: 'Программа недоступна' },
-    { id: 4, status: messageStatus.ERROR, text: 'Материалы недоступны' },
-  ];
-
   private _activeMessages: IMessage[] = [];
 
   get activeMessages(): IMessage[] {
     return this._activeMessages;
   }
 
-  addMessage(messageObj: Omit<IMessage, 'id'>): void {
+  private addMessage(messageObj: Omit<IMessage, 'id'>): void {
     const generatedId = Date.now();
     this._activeMessages.unshift({
       id: generatedId,
@@ -36,9 +29,25 @@ export class MessagesService {
     if (!message) return;
 
     message.isClosing = true;
-    
+
     setTimeout(() => {
       this._activeMessages = this.activeMessages.filter((message) => message.id !== id);
     }, 500);
+  }
+
+  showWarn(message: string): void {
+    this.addMessage({ status: messageStatus.WARN, text: message });
+  }
+
+  showError(message: string): void {
+    this.addMessage({ status: messageStatus.ERROR, text: message });
+  }
+
+  showSuccess(message: string): void {
+    this.addMessage({ status: messageStatus.SUCCESS, text: message });
+  }
+
+  showInfo(message: string): void {
+    this.addMessage({ status: messageStatus.INFO, text: message });
   }
 }

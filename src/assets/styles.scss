@@ -1,6 +1,6 @@
 @use './_fonts';
 @use './_normalize';
-@use './btn';
+@use './_btn';
 
 * {
   font-family: 'Nunito Sans';
@@ -28,7 +28,7 @@ a {
 
 button {
   cursor: pointer;
-  transition: opacity .5s ease;
+  transition: opacity 0.5s ease;
 
   &:hover {
     opacity: 0.8;
@@ -63,4 +63,10 @@ button {
 .container {
   width: 1180px;
   margin: 0 auto;
+}
+
+.footer-title {
+  font-weight: var(--font-bold);
+  line-height: 24px;
+  color: #f3f5f4;
 }
