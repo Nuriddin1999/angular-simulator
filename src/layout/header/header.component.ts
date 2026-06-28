@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { IHeaderLinks } from '../../app/interfaces';
+import { IHeaderLinks } from '../../interfaces/interfaces';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({

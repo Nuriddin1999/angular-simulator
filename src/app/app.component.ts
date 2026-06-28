@@ -4,7 +4,7 @@ import './training';
 import { Color } from '../enums/color';
 import './collection';
 import { CommonModule } from '@angular/common';
-import { LocalStorageService } from './services/local-storage/local-storage.service';
+import { LocalStorageService } from '../services/local-storage/local-storage.service';
 import { HeaderComponent } from '../layout/header/header.component';
 import { FooterComponent } from '../layout/footer/footer.component';
 import { RouterOutlet } from '@angular/router';

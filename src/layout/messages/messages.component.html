@@ -1,14 +1,16 @@
-@if (messagesService.activeMessages.length !== 0) {
-  <ul class="toasts-list">
-    @for (message of messagesService.activeMessages; track message.id) {
-      <li class="toasts-list__item">
-        <ng-container
-          [ngTemplateOutlet]="messageTemplate"
-          [ngTemplateOutletContext]="{ $implicit: message }"
-        ></ng-container>
-      </li>
-    }
-  </ul>
+@if (messages$ | async; as messages) {
+  @if (messages.length !== 0) {
+    <ul class="toasts-list">
+      @for (message of messages; track message.id) {
+        <li class="toasts-list__item">
+          <ng-container
+            [ngTemplateOutlet]="messageTemplate"
+            [ngTemplateOutletContext]="{ $implicit: message }"
+          ></ng-container>
+        </li>
+      }
+    </ul>
+  }
 }
 
 <ng-template #messageTemplate let-message>

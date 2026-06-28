@@ -11,8 +11,8 @@ import {
   IBlog,
   IPopularTourisms,
   IShareImpressions,
-} from '../../app/interfaces';
-import { MessagesService } from '../../app/services/messages/messages.service';
+} from '../../interfaces/interfaces';
+import { MessagesService } from '../../services/messages/messages.service';
 
 @Component({
   selector: 'app-home',

@@ -1,37 +1,37 @@
 import { Injectable } from '@angular/core';
-import { messageStatus } from '../../../enums/messageStatus';
-import { IMessage } from '../../interfaces';
+import { messageStatus } from '../../enums/messageStatus';
+import { IMessage } from '../../interfaces/interfaces';
+import { BehaviorSubject, from, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MessagesService {
-  private _activeMessages: IMessage[] = [];
+  private _activeMessagesSub: BehaviorSubject<IMessage[]> = new BehaviorSubject<IMessage[]>([]);
 
-  get activeMessages(): IMessage[] {
-    return this._activeMessages;
-  }
+  readonly activeMessages$: Observable<IMessage[]> = this._activeMessagesSub.asObservable();
 
   private addMessage(messageObj: Omit<IMessage, 'id'>): void {
     const generatedId = Date.now();
-    this._activeMessages.unshift({
-      id: generatedId,
-      status: messageObj.status,
-      text: messageObj.text,
-    });
+    this._activeMessagesSub.next([
+      { id: generatedId, status: messageObj.status, text: messageObj.text },
+      ...this._activeMessagesSub.value,
+    ]);
 
     setTimeout(() => this.closeMessage(generatedId), 5000);
   }
 
   closeMessage(id: number): void {
-    const message = this._activeMessages.find((m) => m.id === id);
+    const message = this._activeMessagesSub.value.find((m) => m.id === id);
 
     if (!message) return;
 
     message.isClosing = true;
 
     setTimeout(() => {
-      this._activeMessages = this.activeMessages.filter((message) => message.id !== id);
+      this._activeMessagesSub.next(
+        this._activeMessagesSub.value.filter((message) => message.id !== id),
+      );
     }, 500);
   }
 
