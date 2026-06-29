@@ -22,7 +22,7 @@ export class UserService {
   }
 
   getUsers(): Observable<IUser[]> {
-    return this.usersSubject;
+    return this.usersSubject.asObservable();
   }
 
   loadUsers() {

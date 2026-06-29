@@ -18,10 +18,5 @@ export class LoaderComponent {
       document.body.style.overflow = isLoading ? 'hidden' : 'auto';
     });
   }
-
-  private ngOnInit(): void {
-    setTimeout(() => {
-      this.loaderService.hideLoader();
-    }, 2000);
-  }
+  
 }
