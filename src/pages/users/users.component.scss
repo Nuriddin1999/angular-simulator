@@ -1,4 +1,133 @@
-p {
-  margin: 200px 0;
-  text-align: center;
+.users {
+  padding-top: 236px;
+  background-color: #f3f5f4;
+
+  &__container {
+    width: 1460px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 30px;
+    color: #1d3939;
+    text-align: center;
+  }
+
+  &__list {
+    margin: 80px 0 0;
+    padding-bottom: 187px;
+    display: flex;
+    gap: 50px 70px;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    &-item {
+      width: calc(100% / 3 - 140px / 3);
+    }
+  }
+
+  &__empty {
+    font-weight: 800;
+    font-size: 26px;
+    line-height: 30px;
+    color: #ffffff;
+    padding: 35px;
+    background-color: #b15757;
+    border-radius: 20px;
+  }
+}
+
+.card {
+  background-color: #ffffff;
+  border-top: 4px solid #d4a373;
+  border-radius: 4px;
+  padding: 35px 30px 50px;
+  box-shadow: 0px 10px 30px 0px #0000000f;
+  width: 100%;
+
+  &__user-name {
+    font-weight: 800;
+    font-size: 26px;
+    line-height: 30px;
+    color: #1d3939;
+    margin: 0 0 3px;
+  }
+
+  &__user-username {
+    display: block;
+    font-weight: var(--font-bold);
+    color: #d4a373;
+    margin: 0 0 45px;
+  }
+
+  &__data {
+    &:not(:last-child) {
+      margin: 0 0 25px;
+    }
+
+    &-top {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      margin: 0 0 12px;
+      gap: 12px;
+
+      &-line {
+        background-color: #e2e8f0;
+        height: 1px;
+      }
+    }
+
+    &-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      &-wrap {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+      }
+    }
+
+    &-value {
+      font-weight: var(--font-bold);
+      font-size: 14px;
+      line-height: 20px;
+      color: #1d3939;
+
+      &--another {
+        color: #d4a373;
+      }
+
+      &--italic {
+        font-style: italic;
+        font-size: 13px;
+        line-height: 19px;
+        font-weight: var(--font-bold);
+        color: #667c7c;
+      }
+    }
+
+    &-coordinates {
+      display: flex;
+      gap: 4px;
+
+      .card__data-value {
+        background-color: #f4f7f5;
+        border: 1px solid #e2e8f0;
+        border-radius: 3px;
+        padding: 1px 6px;
+      }
+    }
+  }
+
+  &__span {
+    font-weight: var(--font-min);
+    font-size: 14px;
+    line-height: 20px;
+    color: #667c7c;
+  }
 }

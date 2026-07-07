@@ -1,17 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { LoaderService } from '../../services/loader/loader.service';
 
 @Component({
   selector: 'app-loader',
-  imports: [],
+  imports: [AsyncPipe],
   templateUrl: './loader.component.html',
   styleUrl: './loader.component.scss',
 })
 export class LoaderComponent {
-  isLoading: boolean = true;
-  
-  private ngOnInit(): void {
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 2000);
+  loaderService: LoaderService = inject(LoaderService);
+
+  isLoading$ = this.loaderService.isLoading$;
+
+  constructor() {
+    this.isLoading$.subscribe((isLoading) => {
+      document.body.style.overflow = isLoading ? 'hidden' : 'auto';
+    });
   }
+  
 }

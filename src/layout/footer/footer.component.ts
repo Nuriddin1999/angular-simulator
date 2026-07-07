@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ISocialMedias } from '../../app/interfaces';
+import { ISocialMedias } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-footer',
