@@ -9,25 +9,26 @@ import { ISocialMedias } from '../../interfaces/interfaces';
   styleUrl: './footer.component.scss',
 })
 export class FooterComponent {
+
   socialMedias: ISocialMedias[] = [
     {
       id: 1,
-      src: '/pictures/telegram-icon.svg',
+      src: 'telegram-icon',
       alt: 'Telegram icon',
     },
     {
       id: 2,
-      src: '/pictures/vk-icon.svg',
+      src: 'vk-icon',
       alt: 'VK icon',
     },
     {
       id: 3,
-      src: '/pictures/pinterest-icon.svg',
+      src: 'pinterest-icon',
       alt: 'Pinterest icon',
     },
     {
       id: 4,
-      src: '/pictures/skype-icon.svg',
+      src: 'skype-icon',
       alt: 'Skype icon',
     },
   ];
@@ -51,4 +52,5 @@ export class FooterComponent {
   onSubmit(event: Event) {
     event.preventDefault();
   }
+  
 }

@@ -9,6 +9,7 @@ import { LoaderService } from '../../services/loader/loader.service';
   styleUrl: './loader.component.scss',
 })
 export class LoaderComponent {
+  
   loaderService: LoaderService = inject(LoaderService);
 
   isLoading$ = this.loaderService.isLoading$;
@@ -18,5 +19,5 @@ export class LoaderComponent {
       document.body.style.overflow = isLoading ? 'hidden' : 'auto';
     });
   }
-  
+
 }
